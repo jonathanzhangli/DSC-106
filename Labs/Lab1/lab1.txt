@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Lab1 </title>
+</head>
+<body>
+	<div class="multi-bg-example">\
+		<a href="https://www.youtube.com">Visit Youtube.com!</a> 
+		<p class = “sample”>This paragraph is under “sample” class. </p>
+
+		<h1 class="FirstHeading"> This class is fun </h1>
+			<p class="p1"> Hello, did you watch Spiderman yet? </p>
+
+		<h1 class="SecondHeading"> The dog is out the barn </h1>
+			<p class="p2"> It is what it is </p>
+	</div>
+	
+</body>
+</html>

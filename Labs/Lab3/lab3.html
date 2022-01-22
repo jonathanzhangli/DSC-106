@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+	<script type="text/javascript">
+		// adding a new "p" element using d3
+		d3.select("body").append("p").attr("id","p1").text("New <p> generated on the html document");
+
+		// printing a string on Console
+		console.log("this statement will be shown on console of the inspection tool")
+
+		d3.select("body").selectAll("foods")
+	   .data([10, 20, 30, 40, 50])
+	   .enter()
+	   .append("p")
+	   .attr("class","foods")
+	   .text(function(d) { return "the number is " + d; });
+	</script>
+
+	<script type="text/javascript">
+		var svg = d3.select("body") //create Svg element
+	   .append("svg")
+	   .attr("height",200 )
+	   .attr("width", 200)
+	   .style("border", "solid 8px red");
+	 
+	svg.append("line")
+	   .attr("x1", 50)
+	   .attr("y1", 30)
+	   .attr("x2", 150)
+	   .attr("y2", 100)
+	   .attr("stroke", "black")
+	   .attr("stroke-width","2px");
+
+   svg.append('circle')
+  .attr('cx', 100)
+  .attr('cy', 100)
+  .attr('r', 50)
+  .attr('stroke', 'black')
+  .attr('fill', '#69a3b2');
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+p {
+  color: red;
+  border-left: 5px solid orange;
+}
+
+h1 {
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  background-color: coral;
+}
+
+div.multi-bg-example {
+  width: 100%;
+  height: 400px;
+  background-image: url(firefox.png),
+      url(bubbles.png),
+      linear-gradient(to right, rgba(30, 75, 115, 1), rgba(255, 255, 255, 0));
+  background-repeat: no-repeat,
+      no-repeat,
+      no-repeat;
+  background-position: bottom right,
+      left,
+      right;
+}
+
+h1.FirstHeading {color: red;}
+h1.SecondHeading {color: blue;}
+
+p.p1 {
+  color: cyan
+}
+p.p2 {
+  color: green;
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}

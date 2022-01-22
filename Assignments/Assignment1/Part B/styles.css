@@ -1,0 +1,27 @@
+/*
+CSS is used to handle the styling of your SVG elements. 
+This section expects you to set the styling elements for the face and mouth of the emoji.
+*/
+
+g.eyes {
+    fill: black;
+}
+
+g.eyebrows {
+    fill:black;
+    stroke:black;
+    stroke-width:3;
+}
+
+circle.face {
+    fill:yellow;
+    r:90;
+    stroke:black;
+    stroke-width:3;
+}
+
+path.lips {
+    fill:none;
+    stroke: black;
+    stroke-width: 10;
+}
