@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="d3.js"></script>
+	<title>Lab 4 Material</title>
+</head>
+<body>
+
+	<div id="activity1">
+		<p>Activity 1: Draw a barchart with an array [1, 2, 3, 4, 5]</p>
+	</div>
+
+	<div id="activity3">
+		<p>Activity 3: Draw a scatterplot with cereals.csv</p>
+	</div>
+
+	<script type="text/javascript">
+		
+		/* Activity 1: Draw a barchart that visualizes an array */
+		var dataset =[1, 2, 3, 4, 5];
+		var svgwidth_a1 = 400;
+		var svgheight_a1 = 100;
+
+		// add your code
+		var svg_a1 = d3.select('#activity1').append('svg')
+		.attr("width", svgwidth_a1)
+		.attr("height", svgheight_a1);
+		
+
+		svg_a1.selectAll(".a1bar")
+		.data(dataset).enter()
+	      .append("rect")
+		.attr("class", "a1bar")
+		.attr("x", function(d, i){
+			return (i*(20))+d+i;
+		})
+		.attr("y", function(d){
+			return (10-d)*10;
+		})
+		.attr("width", function(d){
+			return 20;
+		})
+		.attr("height", function(d){
+			return d * 20;
+		});
+
+
+
+		/* Activity 2-1: Loading csv without rowConverter */
+		// add your code
+		const cereals_original = d3.csv("cereal.csv");
+		cereals_original.then(function(data){
+			console.log(data);
+		});	
+
+
+
+
+		/* Activity 2-2: Add rowConverter callback function 
+		   this function convert Calories and Carbo to float */ 
+		// add your code
+		var rowConverter = function(d){
+			return {
+				Name: d.Name,
+				Manufacturer: d.Manufacturer,
+				Calories: parseFloat(d.Calories),
+				Carbo: parseFloat(d.Carbo)
+			};
+		}
+
+		const cereals = d3.csv("cereal.csv", rowConverter);
+		cereals.then(function(data){
+			console.log(data);
+		});	
+
+		/* Activity 3: draw scatterplot with Calories and Carbo */
+		cereals.then(function(data){
+			var svgwidth_a3 = 300;
+			var svgheight_a3 = 300;
+		 
+			var svg_a3 = d3.select("#activity3").append("svg")
+				.attr("width", svgwidth_a3)
+				.attr("height", svgheight_a3);
+
+			svg_a3.selectAll("circle") 
+		 .data(data)
+		 .enter()
+		 .append("circle")
+		 .attr("cx", function(d) {
+			 return d["Calories"];
+			 })
+		 .attr("cy", function(d) {
+			 return (300-(d["Carbo"]*10));
+			 })
+		 .attr("r", 3)
+		 .attr("fill",function(d){
+		 	if (d.Manufacturer == "K")
+		 		return "red";
+		 	else if (d.Manufacturer=="G")
+		 		return "green";
+		 	else if (d.Manufacturer=="P")
+		 		return "blue";
+		 	else
+		 		return "black";
+		 })
+
+
+			// Question 3-1: add your code below to draw a scatterplot
+
+		});
+
+		
+
+		/* Activity 3: draw scatterplot with Calories and Carbo */
+		
+
+	</script>
+
+</body>
+</html>
