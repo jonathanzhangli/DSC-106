@@ -1,0 +1,18 @@
+.center_plot {
+    margin: auto;
+    text-align: center;
+}
+
+.section {
+    text-align: center;
+}
+
+.q2_plot {
+    fill:#69b3a2;
+    stroke:#69b3a2;
+    stroke-width:3;
+}
+
+.graph-svg-component {
+    background-color: pink;
+}

@@ -1,0 +1,161 @@
+<html>
+<head>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="d3.js"></script>
+	<title>Lab 4 Material</title>
+<script async src='/cdn-cgi/bm/cv/669835187/api.js'></script></head>
+<body>
+
+	<div id="activity1">
+		<p>Activity 1: calculate the average calories for each manufacturer</p>
+	</div>
+
+
+	<div id="activity2">
+		<p>Activity 2: polish the cereal scatterplot from last time</p>
+	</div>
+
+
+
+
+	<script type="text/javascript">
+
+		
+
+		/* Activity 2-1: Loading csv without rowConverter */
+		// add your code
+		const cereals_original = d3.csv("cereal.csv");	
+		cereals_original.then(function(data){console.log(data);});	
+		
+
+
+
+
+		/* Activity 2-2: Add rowConverter callback function 
+		   this function convert Calories and Carbo to float */ 
+		// add your code
+		var rowConverter = function(d){
+			return {
+				Name: d.Name,
+				Manufacturer: d.Manufacturer,
+				Calories: parseFloat(d.Calories),
+				Carbo: parseFloat(d.Carbo)
+			};
+		}
+		const cereals = d3.csv("cereal.csv", rowConverter);
+		cereals.then(function(data){
+			console.log(data);
+		});
+		
+		
+		
+		// Activity 2
+		// Draw scatterplot with Calories and Carbo
+		cereals.then(function(data){
+			var svgwidth_a2 = 300;
+			var svgheight_a2 = 300;
+
+			var svg_a2 = d3.select("#activity2").append("svg")
+				.attr("width", svgwidth_a2)
+				.attr("height", svgheight_a2);
+
+
+
+		
+
+			// define your scale variables here
+			var padding=30;
+			var xScale = d3.scaleLinear()
+							   .domain([d3.min(data,function(d){return d.Calories;}),
+							   			d3.max(data,function(d){return d.Calories;})])
+							   .range([padding, svgwidth_a2-padding]);
+			var yScale= d3.scaleLinear()
+							   .domain([d3.min(data,function(d){return d.Carbo;}),
+							   			d3.max(data,function(d){return d.Carbo;})])
+							   .range([padding, svgheight_a2-padding]);
+
+
+
+			// drawing the actual scatterplot
+			svg_a2.selectAll("circle")
+					.data(data).enter().append("circle")
+					.attr("cx", function(d){
+						return xScale(d.Calories);
+					})
+					.attr("cy", function(d){
+						return yScale(d.Carbo);
+					})
+					.attr("r", 3)
+					.attr("fill", function(d){	
+						if (d.Manufacturer == "K") return "red";
+						else if (d.Manufacturer == "G") return "blue";
+						else if (d.Manufacturer == "P") return "yellow";
+					})
+					.attr("opacity", 0.5);
+
+
+			// add label to each circle, which is the name of each cereal
+			svg_a2.selectAll("text")
+				  .data(data).enter().append("text")
+				  .attr("x",function(d){
+				  	return xScale(d.Calories);//change
+				  })
+				  .attr("y",function(d){
+				  	return yScale(d.Carbo);
+				  })
+				  .text(function(d){return d.Name;})
+				  .attr("font-size",8);
+
+
+
+		});
+		cereals.then(function(data){
+			
+			
+			//Activity 1 : Calculate the average calories for each manufacturer.
+
+			var subgroups = {	"K": data.filter(x=>x.Manufacturer=="K").map(function(d){return d["Calories"]}),  // list calories of all K cereals
+								"G": data.filter(x=>x.Manufacturer=="G").map(function(d){return d["Calories"]}),  // list calories of all G cereals
+								"P": data.filter(x=>x.Manufacturer=="P").map(function(d){return d["Calories"]})}; // list calories of all P cereals
+
+
+			// averages: an array of objects.
+			// It has two keys - Manufacturer and Calories
+			var averages =  []; 
+
+			// Add your code below.
+			// The code should update averages[] then visualize it with a barchart 
+			for (i in Object.keys(subgroups)){
+				averages.push({"Manufacturer":Object.keys(subgroups)[i],"Calories":d3.mean(subgroups[Object.keys(subgroups)[i]])})
+			}
+			console.log(averages)
+
+			/* Activity 1: Draw a barchart that visualizes an array */
+		var dataset = averages.map(function(d){return d["Calories"]})
+		var svgwidth_a1 = 400;
+		var svgheight_a1 = 100;
+
+		// add your code
+		var svg_a1 = d3.select("#activity1").append("svg").attr("width",svgwidth_a1).attr("height",svgheight_a1);
+		svg_a1.selectAll(".a1bar")
+				.data(dataset).enter()
+			    .append("rect")
+				.attr("class", "a1bar")
+				.attr("x", function(d){return 100;})
+				.attr("y", function(d,i){return d-100+30*i-10;})
+				.attr("width", function(d){return d;})
+				.attr("height", function(d){return 20;});
+
+		
+		});
+
+		
+
+	</script>
+
+
+
+<script type="text/javascript">(function(){window['__CF$cv$params']={r:'6d7addb51ba37ca7',m:'pxN.ZCnhkALnotJYYSsx.llO1m8.cBrKuGvicoE9jgI-1643882990-0-AY75qMCoYC7Jg+LNzHomUAcQmE/5kDdgBKt917gsbuev2LuOVZpL+GPTRvQ5fz5pdmmsOImQ1f7cU7uwBxEDG2q7E3o0B94H+HzbQIc9n93K3SeMCQr9OhXk1Co2nwwkFh1bDLijDHsO6EJWnEQ9qCj1yViNGrZ0kgbHqvwUW5MQg6R6FmwjQTQIoFKfnXZlbA==',s:[0x1cc7fef482,0x86b7da5f2a],}})();</script></body>
+</html>

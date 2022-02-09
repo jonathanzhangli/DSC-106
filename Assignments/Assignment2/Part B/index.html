@@ -1,0 +1,221 @@
+
+<html>  
+<head>  
+<script type="text/javascript" src="app.js">
+    </script>  
+<link rel="stylesheet" href="styles.css">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<meta charset="utf-8">
+
+
+</head>
+<body onload=assignment2()>
+
+<div>
+    <h2 class="section">PART A</h2>
+<div>
+    <h3>Question 1:</h3>
+    <div>
+    In this viz, we wanted to find out what proportion of team runs are scored by the top player of each team in the <a href="https://en.wikipedia.org/wiki/Cricket_World_Cup">ICC Cricket World Cup</a>. The data was used from <a href="https://stats.espncricinfo.com/ci/engine/records/batting/most_runs_career.html?id=12;type=trophy">ESPNCricInfo statistics</a>.
+    <br>
+    <img src="assets/1.png">
+    <ul>
+        <li>What are the data types in this viz?
+            <br>
+            Fields, specifically continuous.
+        </li>
+        <li>Does this visualization follow the “expressiveness” and “effectiveness” principle? 
+            <br>
+            It doesn't follows the expressiveness and effectiveness principles. Each team's percentage is decreasing when reading the circle from the top in a
+            clockwise pattern which is a stark contrast to peoples' natural instinct to assume that the percentages would increase. In addition, the percentages do 
+            not add up to 100 perecent which can be very difficult to interpret. It also doesn't follows the effectiveness principle since each team's portion of the circle
+            looks roughly the same size. A percentage of 30.23% looks almost exactly as large as 29.05%. The colors of the pieces of the circle are also not neccesary.
+        </li>
+        <li>Provide an alternative way you would show this data with reasoning.
+            <br>
+            I would use a bar chart where the x-axis describes all of the teams while the y-axis would include the percentages of team runs are scored by the top player.
+            This would allow someone viewing the diagram to see the explicit difference in percentages of team runs are scored by the top player without having to approximate
+            the difference in sizes like you have to when viewing the current visualization.
+        </li>
+    </ul>
+    </div>
+    <h3>Question 2:</h3>
+    <div>
+    The viz. below was created using <a href="https://www.oecd.org/els/mig/keystat.htm">OECD Migration Data for 2010.</a>
+        <br>
+    <img src="assets/2.png">
+    <ul> 
+
+        <li>What is the dataset type?
+            <br>
+            Table, rows and columns
+        </li>
+        <li>Identify the “WHY”of the Task Abstraction.
+            <br>
+            This visualization is for a user to get a general idea of how many people immigrate from one country to another as well as see
+            which countries a particular country emigrates from and is immgrated to the most. Targets include number of immigrants/emigrants and different countries.
+        </li>
+        <li>Which country has the highest immigration and which has the least emigration?
+            <br>
+            Highest immigration is the United States with 415,000 people and the lowest emigration is Japan with 32,000 people. 
+        </li>
+        <li>Which country has the least immigration and which has least emigration?
+            <br>
+            Lowest immigration is Mexico with 13,000 people and the highest emigration is China with 519,000 people. 
+        </li>
+        <li>Identify the marks and channels used in this viz.
+            <br>
+            The marks include the bar displaying the immigration and emmigration numbers for each country, the circles highlighting each country.
+            The channels include the thickness and direction of the grey lines between each country as well as the the yellow and brown colors 
+            depictinng immigration and emigration respectively.
+        </li>
+    </ul>
+    </div>
+    <h3>Question 3:</h3>
+    <div>
+    The viz below is a scatterplot of two quantities.
+        <br>
+    <img src="assets/3.png">
+    <ul> 
+
+
+        <li>Identify the “WHY” of the Task Abstraction for this viz.
+            <br>
+            This visualization allows a user to see how the price of an avacado changes at different price points amongst different years.
+            Targets include price, time, and volume. 
+        </li>
+        <li>How is the relationship between the quantities on the X & Y axis?
+            <br>
+            For almost every year, the volume of avacados sold have a negative correlation with the price of the avacado. 
+        </li>
+        <li>Identify the marks and channel used in this viz.
+            <br>
+            The marks include circles that represent the number of avacados sold in one week and lines that represent the best fit line for
+            each year. The channels include the colors of the circles and lines.
+        </li>
+        <li>Which year has the highest avocado price? Which year(s) have the most and least varying price?
+            <br>
+            2017, on average, had the highest avacado price of $2. The year with the most varying price was was also 2017 with low prices of 80 cents
+            all the way to roughly $2. The year with the least varying price was 2015 with a low price of rouhgly 90 cents all the way to $1.10.
+        </li>
+
+    </ul>
+    </div>
+    <h3>Question 4:</h3>
+    <div>
+    Below is a processed snippet of <a href="https://insights.stackoverflow.com/survey">Stack Overflow Annual Developer Survey of 2018</a> with 5 countries.
+        <br>
+    <img src="assets/4.png">
+    <ul> 
+
+
+        <li>Analyze the dataset, data types, and its availability.
+            <br>
+            The snippet dataset has 5 rows and 5 columns, making it a table dataset. The datatypes include 5 attributes and is a static dataset since
+            this dataset is specifically from 2018 and no new updates will be made to it.
+        </li>
+        <li>How would you represent the following in a single plot? Justify your choice and indicate the marks and channels in your plot.
+            <ol>
+                <li>Country vs EdLevel
+                    <br>
+                    I would use a stacked column chart where the x-axis would be differenct countries and the y-axis would be education level. Each stack would
+                    determine the education level(each level would also be a different color for easier interpretation). Marks would be lines for each bar and the
+                    channels would be the heights of each bar and the colors in those bars.
+                </li>
+                <li>Gender vs Annual Comp
+                    <br>
+                    I would use a double bar graph where the x-axis would be gender and the y-axis would be annual compensation. Each bar would be a different color
+                    to represent different genders. Marks would be lines for the bars and the channels would be the heights and colors of the bars. 
+                </li>
+                <li>Age vs Median Annual Comp
+                    <br>
+                    I would use a simple line graph where the x-axis would be the age and the y-axis would be the median annual compensation for each age. The mark
+                    would be the line of the linechart itself and the channels would be the directions of the line as it travels from left to right representing drops
+                    and growth in compensation.
+                </li>
+            </ol>
+        </li>
+        
+
+    </ul>
+    </div>
+</div>
+</div>
+    
+<div>
+<h2 class="section">PART B</h2>
+<h3>Question 1:</h3>
+<div>
+    Optional Questions:
+
+    <ul>
+        <li>Print an example of an item and attribute each from this dataset.
+            <script>
+                // var filePath="E-commerce data.csv";
+                // const commerce = d3.csv(filePath, d3.autoType);
+                // commerce.then(function(data){
+                //     row = data[0]
+                //     console.log(row);
+                // });
+            </script>
+        </li>
+        <li>Examine the attribute types of all the attributes in the dataset and print an attribute type for each attribute.(ex: attribute: attribute type)
+        </li>
+        <li>Is this a static or dynamic dataset ?
+            <br> No
+        </li>
+    </ul>
+</div>
+
+<h3>Question 2:</h3>
+<div id="q2">
+    <h4>States:</h4>
+    <div id="q2_states">
+        California, Washington, New York
+    </div>
+    <h4>Plot:</h4>
+    <div id="q2_plot" class="center_plot">
+    </div>
+</div>
+    
+<h3>Question 3:</h3>
+<div id="q3">
+    <h4>Categories:</h4>
+    <div id="q3_categories">
+        Technology
+    </div>
+    <h4>Plot:</h4>
+    <div id="q3_plot" class="center_plot">
+    </div>
+</div>
+<h3>Question 4:</h3>
+<div id="q4">
+    <h4>Sub-Categories</h4>
+    <div id="q4_subcat">
+
+    </div>
+    <h4>Plot:</h4>
+    <div id="q4_plot" class="center_plot">
+    </div>
+</div> 
+<h3>Question 5:</h3>
+<div id="q5">
+
+    <h4>Plot 1:</h4>
+    <div id="q5_plot1" class="center_plot">
+    </div>
+    <h4>Plot 2:</h4>
+    <div id="q5_plot2" class="center_plot">
+    </div>
+    <h4>Plot 3:</h4>
+    <div id="q5_plot3" class="center_plot">
+    </div>
+    <h4>Plot 4:</h4>
+    <div id="q5_plot4" class="center_plot">
+    </div>
+</div>
+    
+   
+</div>
+</body>  
+</html>  
