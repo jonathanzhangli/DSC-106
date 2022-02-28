@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="d3.js"></script>
+	<title>Lab 7 Material</title>
+</head>
+<body>
+	<div id="activity2">
+		<p>Activity 1: Draw an upside-down stacked bar chart </p>
+	</div>
+
+	<script type="text/javascript">
+		
+		
+		// input dataset
+		var dataset = [
+						{ store: "Vons", apples: 5, oranges: 10, grapes: 22 }, 
+						{ store: "Ralph's", apples: 4, oranges: 12, grapes: 28 }, 
+						{ store: "Trader Joe's", apples: 2, oranges: 19, grapes: 32 }, 
+						{ store: "Whold Foods", apples: 7, oranges: 23, grapes: 35 }, 
+						{ store: "Bristol Farm", apples: 23, oranges: 17, grapes: 43 }
+					];
+
+		// set the color for each secondary Key value (types of fruits - apples, oranges, grapes)
+		var colors = function(i){
+			colorarray = ["red", "orange", "purple"];
+			return colorarray[i];
+		}
+
+
+		/* Activity 1-1: stack secondary Key values, using stack() method */
+		var stack = d3.stack().keys(["apples","oranges","grapes"]);
+		var series = stack(dataset);
+		console.log(series);
+		
+
+		// plotting stacked bar chart
+		var svgheight = 300;
+		var svgwidth = 500;
+		var padding = 20;
+
+		var svg = d3.select("#activity2").append("svg")
+				.attr("height", svgheight)
+				.attr("width", svgwidth);
+
+		var xScale = d3.scaleBand()
+						.domain(d3.range(dataset.length))
+						.range([padding, svgwidth-padding])
+						.paddingInner(0.05);
+
+		var yScale = d3.scaleLinear()
+						.domain([0, d3.max(dataset, function(d){ 
+							return d.apples + d.oranges + d.grapes;
+						})])
+						.range([padding, svgheight-padding]);
+
+		/* Activity 1-2: group bars with respect to the secondary Key */
+
+		var groups  = svg.selectAll(".gbars").data(series).enter().append("g").attr("class","gbars").attr("fill", function(d,i){ return colors(i);})
+
+
+						
+		/* Activity 1-3: draw a bar for each Key value */
+		var rects = groups.selectAll("rect").data(function(d){console.log(d); return d;}).enter().append("rect").attr("x", function(d,i){ return xScale(i);}).attr("y",function(d){ return yScale(d[0]);})
+				  .attr("width",function(d){return xScale.bandwidth();}).attr("height",function(d){return yScale(d[1]-d[0]);})
+
+
+
+		/* Activity 1-4: add labels for each bar */
+		var labels = groups.selectAll("text").data(function(d){return d;}).enter().append("text").attr("fill","black")	        .attr("x", function(d,i){
+						return xScale(i);
+					})
+					.attr("y", function(d, i){
+						return yScale(d[1]);
+					})
+					.text(function(d){
+						return (d[1]-d[0]); 
+					});
+			
+
+
+
+		
+		
+
+
+
+
+	</script>
+
+</body>
+</html>
