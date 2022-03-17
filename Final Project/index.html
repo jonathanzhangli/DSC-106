@@ -1,0 +1,103 @@
+
+<html>  
+<head>  
+<script type="text/javascript" src="app.js">
+    </script>  
+<link rel="stylesheet" href="styles.css">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+<body onload=assignment4()> 
+
+
+<div>
+<h2 class="section">PART A</h2>
+
+
+<div>
+<h3>#1:</h3>
+<div id="q1">
+    Color scheme: black 
+    Marks: lines of a bar chart
+    Channels:the vertical distance
+    BUTTON: changes between home and away
+    ANIMATION: Heights adjust in real time
+
+    </div>
+    <div id="radio" class="center_plot">
+        <input type="radio" id="H" name="result" value="H" checked="checked">
+        <label for="H">Home</label>
+        <input type="radio" id="A" name="result" value="A">
+        <label for="A">Away</label><br>
+    </div>
+    <h4>Plot:</h4>
+    <div id="q1_plot" class="center_plot">
+    </div>
+</div>    
+</div>
+    
+<div>
+<h3>#2:</h3>
+<div id="q2">
+    Color scheme: Black and blue to highlight user selection
+    Marks: circles
+    Channels: horizontal and vertical position
+    DROP DOWN MENU: select a player's name to see highlight their values and change the opacity of the others
+    ANIMATION: Other values fade on change
+
+
+    </div>
+    <h4>Plot:</h4>
+    <select id="dropDown" class="center_plot"></select>
+    <div id="q2_plot" class="center_plot">
+    </div>
+</div>    
+
+<div>
+<h3>#3:</h3>
+<div id="q3">
+  Color scheme: Blue/Orange to denote 2-point/3-point shot
+  Marks: Lines that makeup bars
+  Channels: The heights of the lines and colors
+  Legend: Denotes that blue is a 2 point shot and orange is a 3
+
+    </div>
+    <h4>Plot:</h4>
+    <div id="q3_plot" class="center_plot">
+    </div>
+</div>    
+   
+<div>
+<h3>#4:</h3>
+
+<div id="q4">
+    Color scheme: Shades of red to denote intensity of shot percentage
+    Marks: lines 
+    Channels: Color intensity
+    TOOLTIP:Total points scored per quarter 
+
+
+    </div>
+    <h4>Plot:</h4>
+    <div id="q4_plot" class="center_plot">
+    </div>
+</div>    
+
+<div>
+<h3>#5:</h3>
+
+<div id="q5">
+    Color scheme: Blue
+    Marks: The lines that make up the boxplots-median,quartiles,range...
+    Channels: Heights of lines/vertical position
+
+    </div>
+    <h4>Plot:</h4>
+    <div id="q5_plot" class="center_plot">
+    </div>
+</div>    
+   
+    
+   
+</body>  
+</html>  
