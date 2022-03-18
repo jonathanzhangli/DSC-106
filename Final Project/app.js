@@ -5,6 +5,7 @@ function assignment4(){
     question3(filePath);
     question4(filePath);
     question5(filePath);
+    extraCredit(filePath);
 }
 var rowConverter = function(d){
             return {
@@ -19,7 +20,7 @@ var rowConverter = function(d){
                 SHOT_CLOCK:parseInt(d.SHOT_CLOCK),
                 DRIBBLES:parseFloat(d.DRIBBLES),
                 TOUCH_TIME: parseFloat(d.TOUCH_TIME),
-                SHOT_DIST: parseFloat(d.SHOT_DIST),
+                SHOT_DIST: parseInt(d.SHOT_DIST),
                 PTS_TYPE:d.PTS_TYPE,
                 SHOT_RESULT:d.SHOT_RESULT,
                 CLOSEST_DEFENDER:d.CLOSEST_DEFENDER,
@@ -260,7 +261,7 @@ var question3=function(filePath){
                 .text("2014-2015 Total Points by Field Goal Type");
               var colors = d3.scaleOrdinal()
                 .domain(types)
-                .range(['mediumblue','orange'])
+                .range(['firebrick','#00008B'])
 
             svg.append("g").attr('transform',`translate(${padding},0)`).call(yAxis).append("text").attr("text-anchor","end")
             svg.append("g").attr('transform',`translate(0,${svgheight-padding})`).call(xAxis).selectAll("text").attr("text-anchor","end").attr("transform","rotate(-45)");
@@ -494,5 +495,155 @@ var question5=function(filePath){
            
 
            })
-      
+}
+
+var extraCredit=function(filePath){
+    const shots = d3.csv(filePath,rowConverter);
+
+    shots.then(function(data){
+        var svgheight = 600;
+        var svgwidth = 600;
+        var padding = 150;
+
+        var made_two = d3.flatRollup(data.filter(x=>x.SHOT_RESULT=="made" && x.PTS_TYPE=="2" && x.SHOT_DIST<=24),c=>d3.sum(c,d=>d.PTS),d => d.SHOT_DIST,x=>"2").sort((a, b) => a[0] - b[0])
+
+        var made_three = d3.flatRollup(data.filter(x=>x.SHOT_RESULT=="made" && x.PTS_TYPE=="3" && x.SHOT_DIST>=22),c=>d3.sum(c,d=>d.PTS),d => d.SHOT_DIST,x=>"3").sort((a, b) => a[0] - b[0])
+        console.log("Extra Credit:")
+
+        var cat=made_two.concat(made_three)
+
+        console.log(cat)
+
+        var xScale = d3.scaleLinear().domain([0,d3.max(made_three, function(d){return d[0];})])
+                        .range([padding, svgwidth-padding]);
+
+
+        var yScale = d3.scaleLinear()
+                        .domain([0,25])
+                        .range([svgheight-padding, padding]);
+
+        var svg = d3.select("#ec_plot").append("svg")
+                        .attr("width", svgwidth)
+                        .attr("height", svgheight);
+        var xAxis=d3.axisBottom(xScale).tickFormat(d=>d)
+        var yAxis=d3.axisLeft(yScale)
+
+
+        var colors_two = d3.scaleLinear()
+              .range(["white", "firebrick"])
+              .domain([1,d3.max(made_two,function(d){return d[2]})])
+
+        var colors_three = d3.scaleLinear()
+              .range(["#F0FFFF", "#00008B"])
+              .domain([1,d3.max(made_three,function(d){return d[2]})])
+
+        var circ = svg.selectAll("circle").data(cat).enter().append("circle").attr("id",d=>String(d[1])).attr("cx", function(d,i){ return  0;}).attr("cy",function(d){ return yScale(12.5);})
+              .attr("r", function(d){ return d[0] * 13})
+              .style("fill",function(d){return "transparent"})
+              .style("stroke",function(d){
+                if (d[1] == "2"){
+                    return colors_two(d[2])
+                }
+                else{
+                    return colors_three(d[2])
+                }
+            })
+              .style("stroke-width", 15)
+
+        // Adding Court
+        svg.append('rect')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('width', svgwidth)
+          .attr('height', svgheight)
+          .attr('stroke', 'black')
+          .attr('fill', 'transparent');
+
+        // 3 Point Line
+        const arc = d3.arc()
+          .outerRadius(275)
+          .innerRadius(283)
+          .startAngle(-2 * Math.PI / 2)
+          .endAngle(-4 * Math.PI / 2);
+
+        svg.append("path")
+          .attr("transform", "translate(0,300)")
+          .attr("d", arc())
+          .attr('fill', 'black');
+
+        // Key
+        svg.append('rect')
+          .attr('x', 0)
+          .attr('y', 190)
+          .attr('width', 180)
+          .attr('height', 220)
+          .attr('stroke', 'black')
+          .style("stroke-width", 6)
+          .attr('fill', 'transparent');
+
+        // Top Key
+        const arc2 = d3.arc()
+          .outerRadius(118)
+          .innerRadius(113)
+          .startAngle(9.1)
+          .endAngle(6.6);
+
+        svg.append("path")
+          .attr("transform", "translate(145,300)")
+          .attr("d", arc2())
+          .attr('stroke', 'black')
+          .style("stroke-width", 2)
+          .attr('fill', 'black');
+
+        // Half Court
+        const arc3 = d3.arc()
+          .outerRadius(118)
+          .innerRadius(113)
+          .startAngle(2 * Math.PI / 2)
+          .endAngle(4 * Math.PI / 2);
+
+        svg.append("path")
+          .attr("transform", "translate(600,300)")
+          .attr("d", arc3())
+          .attr('stroke', 'black')
+          .style("stroke-width", 2)
+          .attr('fill', 'black');
+
+        // Title
+        svg.append("text")
+            .attr("x", (svgwidth / 2) + 120)             
+            .attr("y", 18)
+            .attr("text-anchor", "middle")  
+            .style("text-decoration", "underline")  
+            .text("2014-2015 NBA Points Made By Distance From Rim");
+
+        var bin_colors = d3.scaleOrdinal()
+            .domain(cat)
+            .range(['firebrick','#00008B'])
+
+        var legend_keys = ["2", "3"]
+
+        // Legend
+        svg.selectAll("dots")
+          .data(legend_keys)
+          .enter()
+          .append("circle")
+            .attr("cx", 510)
+            .attr("cy", function(d,i){ return 49 + i*20}) 
+            .attr("r", 7)
+            .style("fill", function(d){return bin_colors(d)})
+
+    
+        svg.selectAll("labels")
+          .data(legend_keys)
+          .enter()
+          .append("text")
+            .attr("x", 530)
+            .attr("y", function(d,i){ return 50 + i*20}) 
+            .style("fill", function(d){return bin_colors(d)})
+            .text(function(d){ return d+"-Pointer"})
+            .attr("text-anchor", "left")
+            .style("alignment-baseline", "middle")
+
+        })
 }
